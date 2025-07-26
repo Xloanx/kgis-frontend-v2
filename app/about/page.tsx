@@ -32,19 +32,19 @@ const About = () => {
       image: "/api/placeholder/200/200"
     },
     {
-      name: "Sarah Chen",
+      name: "John Akume",
       role: "CTO",
       bio: "Cloud architecture expert with AWS certifications",
       image: "/api/placeholder/200/200"
     },
     {
-      name: "Michael Torres",
+      name: "Jelil Adebola Lawal",
       role: "Head of Operations",
       bio: "Operational excellence and client success specialist",
       image: "/api/placeholder/200/200"
     },
     {
-      name: "Emily Rodriguez",
+      name: "Essein Nwankwo",
       role: "Lead Developer",
       bio: "Full-stack development and modern frameworks expert",
       image: "/api/placeholder/200/200"
