@@ -1,26 +1,137 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  /* Fonts */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: var(--font-geist-mono);
+
+  /* Brand Colors */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  --color-primary: hsl(152 60% 35%);
+  --color-primary-light: hsl(152 45% 50%);
+  --color-primary-dark: hsl(152 70% 25%);
+  --color-primary-foreground: hsl(0 0% 100%);
+
+  --color-secondary: hsl(210 16% 93%);
+  --color-secondary-foreground: hsl(210 11% 15%);
+
+  --color-muted: hsl(210 16% 96%);
+  --color-muted-foreground: hsl(210 8% 46%);
+
+  --color-accent: hsl(152 30% 88%);
+  --color-accent-foreground: hsl(152 70% 25%);
+
+  --color-destructive: hsl(0 72% 51%);
+  --color-border: hsl(210 16% 90%);
+  --color-input: hsl(210 16% 90%);
+  --color-ring: hsl(152 60% 35%);
+
+  --color-navy: hsl(210 30% 8%);
+  --color-navy-light: hsl(210 25% 12%);
+  --color-success: hsl(152 60% 35%);
+  --color-warning: hsl(38 92% 50%);
+
+  /* Sidebar Colors */
+  --color-sidebar: hsl(0 0% 98%);
+  --color-sidebar-foreground: hsl(240 5.3% 26.1%);
+  --color-sidebar-primary: hsl(240 5.9% 10%);
+  --color-sidebar-primary-foreground: hsl(0 0% 98%);
+  --color-sidebar-accent: hsl(240 4.8% 95.9%);
+  --color-sidebar-accent-foreground: hsl(240 5.9% 10%);
+  --color-sidebar-border: hsl(220 13% 91%);
+  --color-sidebar-ring: hsl(217.2 91.2% 59.8%);
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, hsl(152 60% 35%), hsl(152 45% 50%));
+  --gradient-hero: linear-gradient(135deg, hsl(210 30% 8%), hsl(210 25% 12%));
+  --gradient-accent: linear-gradient(180deg, hsl(152 30% 88%), hsl(152 20% 95%));
+
+  /* Shadows */
+  --shadow-soft: 0 2px 8px hsl(210 15% 5% / 0.08);
+  --shadow-medium: 0 4px 16px hsl(210 15% 5% / 0.12);
+  --shadow-strong: 0 8px 32px hsl(210 15% 5% / 0.16);
+  --shadow-glow: 0 0 40px hsl(152 60% 35% / 0.15);
+
+  /* Radius */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  /* Animations */
+  --keyframes-float: {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  };
+  --keyframes-fade-in: {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  };
+  --keyframes-slide-up: {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  };
+
+  --animation-float: float 6s ease-in-out infinite;
+  --animation-fade-in: fade-in 0.6s ease-out forwards;
+  --animation-slide-up: slide-up 0.6s ease-out forwards;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  --radius: 0.75rem;
+  --background: hsl(0 0% 100%);
+  --foreground: hsl(210 11% 15%);
+}
+
+.dark {
+  --background: hsl(210 30% 8%);
+  --foreground: hsl(210 16% 93%);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+  html {
+    scroll-behavior: smooth;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  /* Utilities */
+  .gradient-text {
+    background: var(--gradient-primary);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-sm border border-white/20;
+  }
+
+  /* Shadows */
+  .shadow-soft { box-shadow: var(--shadow-soft); }
+  .shadow-medium { box-shadow: var(--shadow-medium); }
+  .shadow-strong { box-shadow: var(--shadow-strong); }
+  .shadow-glow { box-shadow: var(--shadow-glow); }
+
+  /* Gradients */
+  .bg-gradient-primary { background-image: var(--gradient-primary); }
+  .bg-gradient-hero { background-image: var(--gradient-hero); }
+  .bg-gradient-accent { background-image: var(--gradient-accent); }
+
+  /* Radius */
+  .rounded-lg { border-radius: var(--radius); }
+  .rounded-md { border-radius: calc(var(--radius) - 2px); }
+  .rounded-sm { border-radius: calc(var(--radius) - 4px); }
 }
